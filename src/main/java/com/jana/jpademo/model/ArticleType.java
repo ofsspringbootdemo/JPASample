@@ -1,5 +1,7 @@
 package com.jana.jpademo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -38,7 +40,8 @@ public class ArticleType {
     private Date modifiedDate;
 
     @ManyToOne
-    private PublicationName publicationName;
+    @JsonBackReference
+    private TemplateName templateName;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "ARTICLE_TYPE_ID")
@@ -108,12 +111,12 @@ public class ArticleType {
         this.modifiedDate = modifiedDate;
     }
 
-    public PublicationName getPublicationName() {
-        return publicationName;
+    public TemplateName getTemplateName() {
+        return templateName;
     }
 
-    public void setPublicationName(PublicationName publicationName) {
-        this.publicationName = publicationName;
+    public void setTemplateName(TemplateName templateName) {
+        this.templateName = templateName;
     }
 
     public List<FileDownload> getFileDownloadList() {

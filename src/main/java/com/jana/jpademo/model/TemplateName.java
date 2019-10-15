@@ -1,15 +1,18 @@
 package com.jana.jpademo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Jana on 10/14/2019.
+ * Created by Jana on 10/15/2019.
  */
 @Entity
-@Table(name = "PUBLICATION_TYPE")
-public class PublicationType {
+@Table(name = "TEMPLATE_NAME")
+public class TemplateName {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
@@ -18,6 +21,9 @@ public class PublicationType {
 
     @Column(name = "NAME")
     private String name;
+
+    @Column(name = "ACRONYM")
+    private String acronym;
 
     @Column(name = "DESCRIPTION")
     private String description;
@@ -37,20 +43,33 @@ public class PublicationType {
     @Column(name = "MODIFIED_DATE")
     private Date modifiedDate;
 
+    @ManyToOne
+    @JsonBackReference
+    private TemplateType templateType;
+
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "PUBLICATION_TYPE_ID")
+    @JoinColumn(name = "TEMPLATE_NAME_ID")
+    @JsonManagedReference
+    private List<ArticleType> articleTypeList;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "TEMPLATE_NAME_ID")
     private List<FileDownload> fileDownloadList;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "PUBLICATION_TYPE_ID")
-    private List<PublicationName> publicationNameList;
-
-    public List<PublicationName> getPublicationNameList() {
-        return publicationNameList;
+    public List<ArticleType> getArticleTypeList() {
+        return articleTypeList;
     }
 
-    public void setPublicationNameList(List<PublicationName> publicationNameList) {
-        this.publicationNameList = publicationNameList;
+    public void setArticleTypeList(List<ArticleType> articleTypeList) {
+        this.articleTypeList = articleTypeList;
+    }
+
+    public TemplateType getTemplateType() {
+        return templateType;
+    }
+
+    public void setTemplateType(TemplateType templateType) {
+        this.templateType = templateType;
     }
 
     public Long getId() {
@@ -67,6 +86,14 @@ public class PublicationType {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getAcronym() {
+        return acronym;
+    }
+
+    public void setAcronym(String acronym) {
+        this.acronym = acronym;
     }
 
     public String getDescription() {

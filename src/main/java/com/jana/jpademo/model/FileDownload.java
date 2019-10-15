@@ -23,9 +23,6 @@ public class FileDownload {
     @Column(name = "DESCRIPTIVE_TEXT")
     private String descriptiveText;
 
-    @ManyToOne
-    private PublicationType publicationType;
-
     public Long getId() {
         return id;
     }
@@ -56,13 +53,5 @@ public class FileDownload {
 
     public void setDescriptiveText(String descriptiveText) {
         this.descriptiveText = descriptiveText;
-    }
-
-    public PublicationType getPublicationType() {
-        return publicationType;
-    }
-
-    public void setPublicationType(PublicationType publicationType) {
-        this.publicationType = publicationType;
     }
 }

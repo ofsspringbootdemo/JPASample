@@ -1,4 +1,4 @@
-localhost:8001/getPublicationType
+localhost:8001/getTemplateType
 
 {
   "name": "Book",
@@ -35,7 +35,7 @@ localhost:8001/getPublicationType
   "createdDate": "2014-01-01T23:28:56.782Z",
   "modifiedBy": "Admin",
   "modifiedDate": "2014-01-01T23:28:56.782Z",
-  "publicationNameList": [
+  "templateNameList": [
 	{
 		"name": "India today",
 		"description": "weekly update about India",
@@ -84,7 +84,7 @@ localhost:8001/getPublicationType
   "createdDate": "2014-01-01T23:28:56.782Z",
   "modifiedBy": "Admin",
   "modifiedDate": "2014-01-01T23:28:56.782Z",
-  "publicationNameList": [
+  "templateNameList": [
 	{
 		"name": "New Inventions",
 		"description": "Journals about New Inventions",
@@ -136,7 +136,7 @@ localhost:8001/getPublicationType
   ]
 }
 
-select * from publication_type;
-select * from publication_name;
+select * from template_type;
+select * from template_name;
 select * from Article_type;
 select * from FILE_DOWNLOAD;

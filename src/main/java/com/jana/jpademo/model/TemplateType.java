@@ -1,15 +1,17 @@
 package com.jana.jpademo.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Jana on 10/15/2019.
+ * Created by Jana on 10/14/2019.
  */
 @Entity
-@Table(name = "PUBLICATION_NAME")
-public class PublicationName {
+@Table(name = "TEMPLATE_TYPE")
+public class TemplateType {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
@@ -18,9 +20,6 @@ public class PublicationName {
 
     @Column(name = "NAME")
     private String name;
-
-    @Column(name = "ACRONYM")
-    private String acronym;
 
     @Column(name = "DESCRIPTION")
     private String description;
@@ -40,31 +39,21 @@ public class PublicationName {
     @Column(name = "MODIFIED_DATE")
     private Date modifiedDate;
 
-    @ManyToOne
-    private PublicationType publicationType;
-
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "PUBLICATION_NAME_ID")
-    private List<ArticleType> articleTypeList;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "PUBLICATION_NAME_ID")
+    @JoinColumn(name = "TEMPLATE_TYPE_ID")
     private List<FileDownload> fileDownloadList;
 
-    public List<ArticleType> getArticleTypeList() {
-        return articleTypeList;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "TEMPLATE_TYPE_ID")
+    @JsonManagedReference
+    private List<TemplateName> templateNameList;
+
+    public List<TemplateName> getTemplateNameList() {
+        return templateNameList;
     }
 
-    public void setArticleTypeList(List<ArticleType> articleTypeList) {
-        this.articleTypeList = articleTypeList;
-    }
-
-    public PublicationType getPublicationType() {
-        return publicationType;
-    }
-
-    public void setPublicationType(PublicationType publicationType) {
-        this.publicationType = publicationType;
+    public void setTemplateNameList(List<TemplateName> templateNameList) {
+        this.templateNameList = templateNameList;
     }
 
     public Long getId() {
@@ -81,14 +70,6 @@ public class PublicationName {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getAcronym() {
-        return acronym;
-    }
-
-    public void setAcronym(String acronym) {
-        this.acronym = acronym;
     }
 
     public String getDescription() {
